@@ -33,90 +33,91 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     # calculate the publication year
     episode_year = str(datetime.date.fromtimestamp(episode_pubdate).year)
 
-    # test for podcasts that don't have ID3v2 tags
-    # such as psychologist
+    # the main set of checks
     if channel_title == 'psychologist':
-        # read ID3v1 tags and move them to ID3v2, converting to utf-8 on the way
+        # read v1 tags and move them to v2, converting to utf-8 on the way
         tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
         tag2 = stagger.Tag24()
-        tag2.title = tag.title
+        tag2.title = episode_title
         tag2.artist = tag.artist
-        tag2.album = tag.album
+        tag2.album = tag.album      # 'The PsychoPodcast'
         tag2.date = tag.year
         tag2.comment = tag.comment
         tag2.genre = 'Podcast'
-        #tag2.genre = stagger.id3.genres[tag._genre]
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
-        return
 
     elif channel_title == 'Escape from Cubicle Nation Podcast':
+        # set all v2 tags and remove v1
         tag = stagger.id3v1.Tag1.read(episode_fname)
         tag2 = stagger.Tag24()
         tag2.title = episode_title
-        tag2.artist = 'Escape from Cubicle Nation Podcast'
+        tag2.artist = 'Pamela Slim'
+        tag2.album = 'Escape from Cubicle Nation Podcast'
         tag2.date = tag.year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
-        return
 
     elif channel_title == 'EconTalk':
+        # set all v2 tags
         tag2 = stagger.Tag24()
         tag2.title = episode_title
-        tag2.artist = 'EconTalk'
+        tag2.artist = 'Russ Roberts'
+        tag2.album = 'EconTalk'
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
-        return
 
     elif channel_title == 'NPR: Science Friday Podcast':
+        # set all v2 tags and remove v1
         tag2 = stagger.Tag24()
         tag2.title = episode_title
-        tag2.artist = 'Science Friday'
+        tag2.artist = 'Ira Flatow'
+        tag2.album = 'Science Friday'
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.track = int(os.path.basename(episode_fname)[-6:-4])
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
-        return
 
-    # open the file to change mp3 tags
-    try:
-        tag = stagger.read_tag(episode_fname)
-    except stagger.errors.NoTagError as e:
-        logging.error("{0} GPODDER_EPISODE_TITLE='{1}' "
-            "GPODDER_EPISODE_FILENAME='{2}' GPODDER_CHANNEL_TITLE='{3}' "
-            "GPODDER_EPISODE_PUBDATE='{4}'".format(e, episode_title,
-                episode_fname, channel_title, episode_pubdate))
-        return
-
-    # do we need to update tags?
-    update_flag = True
-
-    # fix tags depending on the podcast
-    if channel_title == 'Америчка':
-        tag.title = tag.album
-        tag.album = 'Америчка'
+    elif channel_title == 'Америчка':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = tag2.album
+        tag2.album = 'Америчка'
+        tag2.write()
 
     elif channel_title == 'Sick and Wrong':
-        tag.artist = 'Sick and Wrong'
-        tag.genre = 'Podcast'
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Dee Simon, Lance Wackerle'
+        tag2.album = 'Sick and Wrong'
+        tag2.genre = 'Podcast'
+        tag2.write()
 
     elif channel_title == 'Mysterious Universe':
-        tag.artist = 'Mysterious Universe'
-        tag.genre = 'Podcast'
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Benjamin Grundy, Aaron Wright'
+        tag2.album = 'Mysterious Universe'
+        tag2.genre = 'Podcast'
+        tag2.write()
 
     elif channel_title == 'Радио Бермудский Треугольник':
-        tag.title = tag.album
-        tag.album = 'Радио Бермудский Треугольник'
+        # don't know what to do. it seems the podcast has changeable tags
+        logging.warning('Please check the latest episode of {0}'.format(
+            channel_title))
+        #tag2 = stagger.read_tag(episode_fname)
+        #tag2.title = tag2.album
+        #tag2.album = 'Радио Бермудский Треугольник'
+        #tag2.write()
 
     else:
-        # if we don't know the podcast, don't change tags
-        update_flag = False
-
-    if update_flag:
-        tag.write()
+        logging.info("No fixes for the episode. GPODDER_EPISODE_TITLE='{0}' "
+            "GPODDER_EPISODE_FILENAME='{1}' GPODDER_CHANNEL_TITLE='{2}' "
+            "GPODDER_EPISODE_PUBDATE='{3}'".format(episode_title,
+                episode_fname, channel_title, episode_pubdate))
 
 if __name__ == '__main__':
     try:
