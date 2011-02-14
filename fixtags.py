@@ -38,7 +38,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # read v1 tags and move them to v2, converting to utf-8 on the way
         tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
         tag2 = stagger.Tag24()
-        tag2.title = episode_title
+        tag2.title = episode_title[18:]
         tag2.artist = tag.artist
         tag2.album = tag.album      # 'The PsychoPodcast'
         tag2.date = tag.year
@@ -119,6 +119,55 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Ira Glass'
         tag2.album = 'This American Life'
         tag2.write()
+
+    elif channel_title == 'Freakonomics Radio':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.composer = tag2.artist
+        tag2.artist = 'Steven D. Levitt, Stephen J. Dubner'
+        tag2.album = 'Freakonomics Radio'
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title == 'Янки после пьянки':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Янки после пьянки'
+        tag2.album = 'Янки после пьянки'
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title == 'Радио "Свободная Деревня"':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title == 'Stuff Mom Never Told You':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Cristen and Molly'
+        tag2.album = 'Stuff Mom Never Told You'
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title == 'Подкаст Кадры':
+        # move v2.2 to v2.4 tags
+        tag22 = stagger.read_tag(episode_fname)
+        tag2 = stagger.Tag24()
+        tag2.artist = tag22.artist
+        tag2.album = tag22.album
+        tag2.title = tag22.title[14:]
+        tag2.genre = 'Podcast'
+        tag2.date = tag22.date
+        tag2.write(episode_fname)
 
     elif channel_title == 'No Agenda':
         # nothing to fix here. In the Morning!
