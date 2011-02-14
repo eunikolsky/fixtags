@@ -11,7 +11,9 @@ import datetime
 import stagger
 
 def setup():
-    LOG_FILENAME = os.path.expanduser('~/.config/gpodder/fixtags.log')
+    '''Set up the logging system.'''
+
+    LOG_FILENAME = os.path.join(os.path.dirname(sys.argv[0]), 'fixtags.log')
     logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG,
             format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
