@@ -113,6 +113,37 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         #tag2.album = 'Радио Бермудский Треугольник'
         #tag2.write()
 
+    elif channel_title == 'This American Life':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Ira Glass'
+        tag2.album = 'This American Life'
+        tag2.write()
+
+    elif channel_title == 'No Agenda':
+        # nothing to fix here. In the Morning!
+        pass
+
+    elif channel_title == 'Еженедельный подкаст от Umputun':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'All in the Mind':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'Talk About English (Learn English)':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'Раша: Азбука Выживания':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'English as a Second Language Podcast':
+        # nothing to fix here
+        pass
+
     else:
         logging.info("No fixes for the episode. GPODDER_EPISODE_TITLE='{0}' "
             "GPODDER_EPISODE_FILENAME='{1}' GPODDER_CHANNEL_TITLE='{2}' "
