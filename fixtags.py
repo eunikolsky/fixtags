@@ -33,90 +33,20 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     # calculate the publication year
     episode_year = str(datetime.date.fromtimestamp(episode_pubdate).year)
 
-    # test for podcasts that don't have ID3v2 tags
-    # such as psychologist
-    if channel_title == 'psychologist':
-        # read ID3v1 tags and move them to ID3v2, converting to utf-8 on the way
-        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
-        tag2 = stagger.Tag24()
-        tag2.title = tag.title
-        tag2.artist = tag.artist
-        tag2.album = tag.album
-        tag2.date = tag.year
-        tag2.comment = tag.comment
-        tag2.genre = 'Podcast'
-        #tag2.genre = stagger.id3.genres[tag._genre]
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-        return
+    # do we have ID3 tags?
+    has_v2 = has_v1 = True
 
-    elif channel_title == 'Escape from Cubicle Nation Podcast':
-        tag = stagger.id3v1.Tag1.read(episode_fname)
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title
-        tag2.artist = 'Escape from Cubicle Nation Podcast'
-        tag2.date = tag.year
-        tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-        return
-
-    elif channel_title == 'EconTalk':
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title
-        tag2.artist = 'EconTalk'
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.write(episode_fname)
-        return
-
-    elif channel_title == 'NPR: Science Friday Podcast':
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title
-        tag2.artist = 'Science Friday'
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.track = int(os.path.basename(episode_fname)[-6:-4])
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-        return
-
-    # open the file to change mp3 tags
+    # try to read ID3v2 tags
     try:
-        tag = stagger.read_tag(episode_fname)
+        tag2 = stagger.read_tag(episode_fname)
     except stagger.errors.NoTagError as e:
-        logging.error("{0} GPODDER_EPISODE_TITLE='{1}' "
-            "GPODDER_EPISODE_FILENAME='{2}' GPODDER_CHANNEL_TITLE='{3}' "
-            "GPODDER_EPISODE_PUBDATE='{4}'".format(e, episode_title,
-                episode_fname, channel_title, episode_pubdate))
-        return
+        has_v2 = False
 
-    # do we need to update tags?
-    update_flag = True
-
-    # fix tags depending on the podcast
-    if channel_title == 'Америчка':
-        tag.title = tag.album
-        tag.album = 'Америчка'
-
-    elif channel_title == 'Sick and Wrong':
-        tag.artist = 'Sick and Wrong'
-        tag.genre = 'Podcast'
-
-    elif channel_title == 'Mysterious Universe':
-        tag.artist = 'Mysterious Universe'
-        tag.genre = 'Podcast'
-
-    elif channel_title == 'Радио Бермудский Треугольник':
-        tag.title = tag.album
-        tag.album = 'Радио Бермудский Треугольник'
-
-    else:
-        # if we don't know the podcast, don't change tags
-        update_flag = False
-
-    if update_flag:
-        tag.write()
+    # try to read ID3v1 tags (in cp1251)
+    try:
+        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
+    except stagger.errors.NoTagError as e:
+        has_v1 = False
 
 if __name__ == '__main__':
     try:
