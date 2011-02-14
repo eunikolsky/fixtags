@@ -169,6 +169,46 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = tag22.date
         tag2.write(episode_fname)
 
+    elif channel_title == 'www.BreakingNewsEnglish.com':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.write()
+
+    elif channel_title.find('Quick and Dirty Tips') > 0:
+        # move v2.2 to v2.4 tags
+        tag22 = stagger.read_tag(episode_fname)
+        tag2 = stagger.Tag24()
+        tag2.artist = tag22.artist
+        tag2.album = tag22.album
+        tag2.title = tag22.title
+        tag2.genre = 'Podcast'
+        tag2.date = tag22.date
+        tag2.track = tag22.track
+        tag2.write(episode_fname)
+
+    elif channel_title == 'The Art Of Programming':
+        # move v2.2 to v2.4 tags
+        tag22 = stagger.read_tag(episode_fname)
+        tag2 = stagger.Tag24()
+        tag2.artist = tag22.artist
+        tag2.album = tag22.album
+        tag2.title = tag22.title[32:]
+        tag2.genre = 'Podcast'
+        tag2.date = episode_year
+        tag2.write(episode_fname)
+
+    elif channel_title == 'Ask the Naked Scientists PODCAST':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title[39:]
+        tag2.artist = 'Chris Smith'
+        tag2.album = 'Ask the Naked Scientists'
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.write()
+
     elif channel_title == 'No Agenda':
         # nothing to fix here. In the Morning!
         pass
