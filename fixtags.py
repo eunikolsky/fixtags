@@ -69,6 +69,16 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
 
+    elif channel_title == 'The Naked Scientists - Stripping Down Science':
+        # set all v2 tags
+        tag2 = stagger.Tag24()
+        tag2.title = episode_title[17:]
+        tag2.artist = 'Chris Smith et al.'
+        tag2.album = 'The Naked Scientists'
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.write(episode_fname)
+
     elif channel_title == 'NPR: Science Friday Podcast':
         # set all v2 tags and remove v1
         tag2 = stagger.Tag24()
@@ -158,6 +168,33 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
 
+    elif channel_title == 'BrainStuff':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Marshall Brain'
+        tag2.album = 'BrainStuff'
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title == 'Stuff To Blow Your Mind':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Robert and Julie'
+        tag2.album = 'Stuff To Blow Your Mind'
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title == 'Stuff You Should Know':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = 'Josh Clark and Chuck Bryant'
+        tag2.album = 'Stuff You Should Know'
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
     elif channel_title == 'Подкаст Кадры':
         # move v2.2 to v2.4 tags
         tag22 = stagger.read_tag(episode_fname)
@@ -209,6 +246,24 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
+    elif channel_title == 'NPR: Car Talk Podcast':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title[9:]
+        tag2.artist = 'Click and Clack, the Tappet Brothers'
+        tag2.album = 'Car Talk'
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
+    elif channel_title.startswith('60-Second '):
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.album = tag2.album[20:]
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
     elif channel_title == 'No Agenda':
         # nothing to fix here. In the Morning!
         pass
@@ -230,6 +285,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'English as a Second Language Podcast':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'A Way with Words':
         # nothing to fix here
         pass
 
