@@ -114,6 +114,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
+    elif channel_title == 'FLOSS Weekly':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.genre = 'Podcast'
+        tag2.write()
+
     elif channel_title == 'Радио Бермудский Треугольник':
         # don't know what to do. it seems the podcast has changeable tags
         logging.warning('Please check the latest episode of {0}'.format(
@@ -289,6 +295,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'A Way with Words':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'Discovery':
         # nothing to fix here
         pass
 
