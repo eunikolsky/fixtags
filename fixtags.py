@@ -219,6 +219,13 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
+    elif channel_title == 'Material World':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
     elif channel_title.find('Quick and Dirty Tips') > 0:
         # move v2.2 to v2.4 tags
         tag22 = stagger.read_tag(episode_fname)
@@ -249,6 +256,13 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Chris Smith'
         tag2.album = 'Ask the Naked Scientists'
         tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.write()
+
+    elif channel_title == 'Listen to English':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.album = 'Listen to English'
         tag2.genre = 'Podcast'
         tag2.write()
 
@@ -299,6 +313,14 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'Discovery':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'Охотник За Головами - Денис aka Radio Grinch':
+        # nothing to fix here
+        pass
+
+    elif channel_title == '6 Minute English':
         # nothing to fix here
         pass
 
