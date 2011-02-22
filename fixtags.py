@@ -349,6 +349,19 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.write()
 
+    elif channel_title == 'The Dave Ramsey Show':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.album = 'The Dave Ramsey Show'
+        tag2.write()
+
+    elif channel_title == 'Manager Tools':
+        # remove picture element from v2.2 and fix date
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.picture = []
+        tag2.date = episode_year
+        tag2.write()
+
     elif channel_title == 'No Agenda':
         # nothing to fix here. In the Morning!
         pass
@@ -398,6 +411,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'Эксперт-шоу Рунетология':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'Friday Night Comedy from BBC Radio 4':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'The Skeptics\' Guide to the Universe':
+        # nothing to fix here
+        pass
+
+    elif channel_title == 'this WEEK in TECH':
         # nothing to fix here
         pass
 
