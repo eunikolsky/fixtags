@@ -213,6 +213,17 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = tag22.date
         tag2.write(episode_fname)
 
+    elif channel_title == 'Machine of Death':
+        # move v2.2 to v2.4 tags
+        tag22 = stagger.read_tag(episode_fname)
+        tag2 = stagger.Tag24()
+        tag2.artist = tag22.artist
+        tag2.album = tag22.album
+        tag2.title = tag22.title
+        tag2.genre = 'Podcast'
+        tag2.date = tag22.date
+        tag2.write(episode_fname)
+
     elif channel_title == 'www.BreakingNewsEnglish.com':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
@@ -374,10 +385,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'The Java Posse':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Machine of Death':
         # nothing to fix here
         pass
 
