@@ -36,15 +36,24 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     # the main set of checks
     if channel_title == 'psychologist':
         # read v1 tags and move them to v2, converting to utf-8 on the way
-        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
+        has_v1 = True
+        try:
+            tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
+        except stagger.errors.NoTagError:
+            # if there's no v1 tag, fill v2 from gPodder
+            has_v1 = False
         tag2 = stagger.Tag24()
         tag2.title = episode_title[18:]
-        tag2.artist = tag.artist
-        tag2.album = tag.album      # 'The PsychoPodcast'
-        tag2.date = tag.year
-        tag2.comment = tag.comment
+        tag2.date = episode_year
         tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
+        if has_v1:
+            tag2.artist = tag.artist
+            tag2.album = tag.album      # 'The PsychoPodcast'
+            tag2.comment = tag.comment
+            stagger.id3v1.Tag1.delete(episode_fname)
+        else:
+            tag2.artist = 'Mulder & Co'
+            tag2.album = 'The PsychoPodcast'
         tag2.write(episode_fname)
 
     elif channel_title == 'Escape from Cubicle Nation Podcast':
