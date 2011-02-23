@@ -426,6 +426,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # nothing to fix here
         pass
 
+    elif channel_title == 'Radio Grinch':
+        # nothing to fix here
+        pass
+
     else:
         logging.info("No fixes for the episode. GPODDER_EPISODE_TITLE='{0}' "
             "GPODDER_EPISODE_FILENAME='{1}' GPODDER_CHANNEL_TITLE='{2}' "
