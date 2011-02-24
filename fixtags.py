@@ -362,6 +362,13 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = 'The Dave Ramsey Show'
         tag2.write()
 
+    elif channel_title == 'Common Sense with Dan Carlin':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title
+        tag2.album = 'Common Sense'
+        tag2.write()
+
     elif channel_title == 'Manager Tools':
         # remove picture element from v2.2 and fix date
         tag2 = stagger.read_tag(episode_fname)
