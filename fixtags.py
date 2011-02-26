@@ -64,7 +64,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.artist = tag.artist
-        tag2.album = 'Институт разнородных вещиц'
+        tag2.album = channel_title
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
@@ -74,7 +74,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.Tag24()
         tag2.title = episode_title
         tag2.artist = 'Pamela Slim'
-        tag2.album = 'Escape from Cubicle Nation Podcast'
+        tag2.album = channel_title
         tag2.date = tag.year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
@@ -85,7 +85,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.Tag24()
         tag2.title = episode_title
         tag2.artist = 'Russ Roberts'
-        tag2.album = 'EconTalk'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
@@ -116,14 +116,14 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.title = tag2.album
-        tag2.album = 'Америчка'
+        tag2.album = channel_title
         tag2.write()
 
     elif channel_title == 'Sick and Wrong':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Dee Simon, Lance Wackerle'
-        tag2.album = 'Sick and Wrong'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.write()
 
@@ -131,7 +131,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Benjamin Grundy, Aaron Wright'
-        tag2.album = 'Mysterious Universe'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.write()
 
@@ -154,7 +154,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Ira Glass'
-        tag2.album = 'This American Life'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.write()
 
@@ -163,7 +163,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.read_tag(episode_fname)
         tag2.composer = tag2.artist
         tag2.artist = 'Steven D. Levitt, Stephen J. Dubner'
-        tag2.album = 'Freakonomics Radio'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
@@ -173,7 +173,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Янки после пьянки'
-        tag2.album = 'Янки после пьянки'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
@@ -191,7 +191,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Cristen and Molly'
-        tag2.album = 'Stuff Mom Never Told You'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
@@ -200,7 +200,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Marshall Brain'
-        tag2.album = 'BrainStuff'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
@@ -209,7 +209,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Robert and Julie'
-        tag2.album = 'Stuff To Blow Your Mind'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
@@ -218,7 +218,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Josh Clark and Chuck Bryant'
-        tag2.album = 'Stuff You Should Know'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
@@ -295,7 +295,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'Listen to English':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
-        tag2.album = 'Listen to English'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.write()
 
@@ -327,7 +327,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'Software Engineering Radio':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
-        tag2.album = 'Software Engineering Radio'
+        tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.write()
 
@@ -336,7 +336,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.read_tag(episode_fname)
         tag2.title = episode_title[46:54] + episode_title[55:]
         tag2.artist = 'Дмитрий Зомбак'
-        tag2.album = 'Chiptune - 8-bit game music podcast'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write()
@@ -346,7 +346,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.read_tag(episode_fname)
         tag2.title = episode_title
         tag2.artist = 'Emaster'
-        tag2.album = 'Ирландское рагу by Emaster'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write()
@@ -371,7 +371,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'The Dave Ramsey Show':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
-        tag2.album = 'The Dave Ramsey Show'
+        tag2.album = channel_title
         tag2.write()
 
     elif channel_title == 'Common Sense with Dan Carlin':
