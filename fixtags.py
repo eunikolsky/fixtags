@@ -56,6 +56,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             tag2.album = 'The PsychoPodcast'
         tag2.write(episode_fname)
 
+    elif channel_title == 'Институт разнородных вещиц':
+        # read v1 tags and move them to v2, converting to utf-8 on the way
+        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
+        tag2 = stagger.Tag24()
+        tag2.title = episode_title
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.artist = tag.artist
+        tag2.album = 'Институт разнородных вещиц'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write(episode_fname)
+
     elif channel_title == 'Escape from Cubicle Nation Podcast':
         # set all v2 tags and remove v1
         tag = stagger.id3v1.Tag1.read(episode_fname)
@@ -367,6 +379,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.read_tag(episode_fname)
         tag2.title = episode_title
         tag2.album = 'Common Sense'
+        tag2.write()
+
+    elif channel_title == 'EnglishLingQ':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        import re
+        parts = re.split(r'^\#(\d{1,3}) ([^-]+) - (.+)$', episode_title,
+                flags=re.IGNORECASE)
+        tag2.title = parts[3]
+        tag2.artist = parts[2]
+        #tag2.track = parts[1]
+        tag2.genre = 'Podcast'
         tag2.write()
 
     elif channel_title == 'Manager Tools':
