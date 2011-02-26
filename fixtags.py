@@ -90,12 +90,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
 
-    elif channel_title == 'The Naked Scientists - Stripping Down Science':
+    elif channel_title == 'The Naked Scientists':
         # set all v2 tags
         tag2 = stagger.Tag24()
         tag2.title = episode_title[17:]
         tag2.artist = 'Chris Smith et al.'
-        tag2.album = 'The Naked Scientists'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
@@ -147,7 +147,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             channel_title))
         #tag2 = stagger.read_tag(episode_fname)
         #tag2.title = tag2.album
-        #tag2.album = 'Радио Бермудский Треугольник'
+        #tag2.album = channel_title
         #tag2.write()
 
     elif channel_title == 'This American Life':
@@ -282,12 +282,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.write(episode_fname)
 
-    elif channel_title == 'Ask the Naked Scientists PODCAST':
+    elif channel_title == 'Ask the Naked Scientists':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.title = episode_title[39:]
         tag2.artist = 'Chris Smith'
-        tag2.album = 'Ask the Naked Scientists'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write()
