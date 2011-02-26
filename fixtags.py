@@ -385,11 +385,11 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         import re
-        parts = re.split(r'^\#(\d{1,3}) ([^-]+) - (.+)$', episode_title,
+        parts = re.search(r'^\#(\d{1,3}) ([^-]+) - (.+)$', episode_title,
                 flags=re.IGNORECASE)
-        tag2.title = parts[3]
-        tag2.artist = parts[2]
-        #tag2.track = parts[1]
+        tag2.title = parts.group(3)
+        tag2.artist = parts.group(2)
+        #tag2.track = parts.group(1)
         tag2.genre = 'Podcast'
         tag2.write()
 
