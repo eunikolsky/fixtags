@@ -100,15 +100,13 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
 
-    elif channel_title == 'NPR: Science Friday Podcast':
+    elif channel_title == 'Science Friday':
         # set all v2 tags and remove v1
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title
+        tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Ira Flatow'
-        tag2.album = 'Science Friday'
+        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
-        tag2.track = int(os.path.basename(episode_fname)[-6:-4])
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
