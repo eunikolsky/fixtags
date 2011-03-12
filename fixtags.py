@@ -447,7 +447,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # nothing to fix here. In the Morning!
         pass
 
-    elif channel_title == 'Еженедельный подкаст от Umputun':
+    elif channel_title == 'UWP - Eженедельный подкаст от Umputun':
         # nothing to fix here
         pass
 
