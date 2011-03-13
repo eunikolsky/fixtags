@@ -311,7 +311,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title.startswith('60-Second '):
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
-        tag2.album = tag2.album[20:]
+        tag2.title = episode_title
+        tag2.album = channel_title
+        tag2.genre = 'Podcast'
+        tag2['COM'] = []
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
 
