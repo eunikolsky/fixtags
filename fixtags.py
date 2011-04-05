@@ -485,6 +485,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.write()
 
+    elif channel_title == 'Career Tools':
+        # remove picture element from v2.2
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.picture = []
+        tag2.write()
+
     elif channel_title == 'No Agenda':
         # nothing to fix here. In the Morning!
         pass
@@ -550,10 +556,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'Radio Grinch':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Career Tools':
         # nothing to fix here
         pass
 
