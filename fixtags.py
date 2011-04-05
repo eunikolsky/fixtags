@@ -68,6 +68,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
+    elif channel_title == 'Зомбо-Ящик':
+        # read v1 tags and move them to v2, converting to utf-8 on the way
+        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
+        tag2 = stagger.Tag24()
+        tag2.title = episode_title[27:]
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.artist = tag.artist
+        tag2.album = channel_title
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write(episode_fname)
+
     elif channel_title == 'Escape from Cubicle Nation Podcast':
         # set all v2 tags and remove v1
         tag = stagger.id3v1.Tag1.read(episode_fname)
