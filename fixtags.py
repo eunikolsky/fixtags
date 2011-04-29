@@ -121,6 +121,19 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
 
+    elif channel_title == 'Application Developer Days':
+        # set all v2 tags
+        tag2 = stagger.Tag24()
+        import re
+        parts = re.search(r'([^(]*) \((.*) на [^)]*\)', episode_title,
+                flags=re.IGNORECASE)
+        tag2.title = parts.group(1)
+        tag2.artist = parts.group(2)
+        tag2.album = channel_title
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.write(episode_fname)
+
     elif channel_title == 'Science Friday':
         # set all v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
