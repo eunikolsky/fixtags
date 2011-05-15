@@ -144,6 +144,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
+    elif channel_title == 'Поверх барьеров - Американский час - Радио Свобода':
+        # set all v2 tags and remove v1
+        tag2 = stagger.Tag24()
+        tag2.artist = 'Александр Генис'
+        tag2.title = episode_title[37:]
+        tag2.album = channel_title
+        tag2.date = episode_year
+        tag2.composer = 'RFE/RL Russian Service'
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write(episode_fname)
+
     elif channel_title == 'Америчка':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
