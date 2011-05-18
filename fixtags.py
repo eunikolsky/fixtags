@@ -320,7 +320,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag22 = stagger.read_tag(episode_fname)
         tag2 = stagger.Tag24()
         tag2.artist = tag22.artist
-        tag2.album = tag22.album
+        tag2.album = channel_title
         tag2.title = tag22.title[32:]
         tag2.genre = 'Podcast'
         tag2.date = episode_year
