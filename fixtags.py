@@ -549,6 +549,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
+    elif channel_title == 'No Agenda':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.genre = 'Podcast'
+        tag2.write()
+
     elif channel_title == 'Healthcare IT Podcast':
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
@@ -571,10 +577,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.read_tag(episode_fname)
         tag2.picture = []
         tag2.write()
-
-    elif channel_title == 'No Agenda':
-        # nothing to fix here. In the Morning!
-        pass
 
     elif channel_title == 'UWP - Eженедельный подкаст от Umputun':
         # nothing to fix here
