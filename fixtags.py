@@ -642,7 +642,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # nothing to fix here
         pass
 
-    elif channel_title == 'The Skeptics\' Guide to the Universe':
+    elif channel_title == 'The Skeptics Guide to the Universe':
         # nothing to fix here
         pass
 
