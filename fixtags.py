@@ -10,15 +10,18 @@ import datetime
 
 import stagger
 
+episode_fname = ''
+
 def setup():
     '''Set up the logging system.'''
 
     LOG_FILENAME = os.path.join(os.path.dirname(sys.argv[0]), 'fixtags.log')
     logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG,
-            format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+            format="%(asctime)s - %(message)s")
 
 def main():
     # get episode info from the environment variables
+    global episode_fname
     try:
         episode_title = os.environ['GPODDER_EPISODE_TITLE']
         episode_fname = os.environ['GPODDER_EPISODE_FILENAME']
@@ -743,6 +746,6 @@ if __name__ == '__main__':
         # if happens something that we didn't foresee,
         # print traceback to the log
         import traceback
-        logging.exception("An exception occured")
+        logging.exception("An exception occurred with file '{}'".format(episode_fname))
         sys.exit(2)
 
