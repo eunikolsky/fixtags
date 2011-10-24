@@ -437,7 +437,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'Канадский Лось':
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title[42:-1]
+        title = episode_title[42:-1]
+        if title == '':
+            title = episode_title
+        tag2.title = title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
