@@ -326,7 +326,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.write()
 
-    elif channel_title == 'WNYC\'s Radiolab':
+    elif channel_title == 'Radiolab':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.album = channel_title
