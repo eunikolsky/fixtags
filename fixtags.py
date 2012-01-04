@@ -390,7 +390,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2['COM'] = []
         tag2.write()
 
-    elif channel_title == 'All in the Mind':
+    elif channel_title == 'All In The Mind':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.album = channel_title
