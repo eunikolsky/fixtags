@@ -550,7 +550,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'EnglishLingQ':
         # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
+        try:
+            tag2 = stagger.read_tag(episode_fname)
+        except stagger.errors.NoTagError:
+            tag2 = stagger.Tag24()
         import re
         parts = re.search(r'^\#(\d{1,3}) ([^-]+) - (.+)$', episode_title,
                 flags=re.IGNORECASE)
@@ -558,7 +561,9 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = parts.group(2)
         #tag2.track = parts.group(1)
         tag2.genre = 'Podcast'
-        tag2.write()
+        tag2.album = channel_title
+        tag2.date = episode_year
+        tag2.write(episode_fname)
 
     elif channel_title == 'TuxRadar Linux Podcast':
         # fix some v2 tags
