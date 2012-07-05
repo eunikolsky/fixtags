@@ -515,20 +515,21 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
+    elif channel_title == 'Chiptune - 8-bit game music podcast':
+        # fix some v2 tags and remove v1
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title
+        tag2.artist = 'Дмитрий Зомбак'
+        tag2.album = channel_title
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
+
     elif channel_title == 'Software Engineering Radio':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
         tag2.album = channel_title
-        tag2.genre = 'Podcast'
-        tag2.write()
-
-    elif channel_title == 'Chiptune - 8-bit game music podcast':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title[46:54] + episode_title[55:]
-        tag2.artist = 'Дмитрий Зомбак'
-        tag2.album = channel_title
-        tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write()
 
