@@ -148,13 +148,14 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.write(episode_fname)
 
     elif channel_title == 'Все о США в подкастах':
-        # set all v2 tags
+        # set all v2 tags and remove v1
         tag2 = stagger.Tag24()
-        tag2.title = episode_title[:-44]
+        tag2.title = episode_title
         tag2.artist = 'Тимур Тажетдинов'
         tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
+        stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
     elif channel_title == 'Science Friday':
