@@ -332,6 +332,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.write(episode_fname)
 
+    elif channel_title == 'English as a Second Language Podcast':
+        # move v2.2 to v2.4 tags
+        tag22 = stagger.read_tag(episode_fname)
+        tag2 = stagger.Tag24()
+        tag2.artist = tag22.artist
+        tag2.album = channel_title
+        tag2.title = tag22.title
+        tag2.genre = 'Podcast'
+        tag2.date = episode_year
+        tag2.comment = tag22.comment
+        tag2.write(episode_fname)
+
     elif channel_title == 'www.BreakingNewsEnglish.com':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
@@ -772,10 +784,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'Раша: Азбука Выживания':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'English as a Second Language Podcast':
         # nothing to fix here
         pass
 
