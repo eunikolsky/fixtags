@@ -8,8 +8,6 @@ import sys
 import logging
 import datetime
 
-import stagger
-
 episode_fname = ''
 
 def setup():
@@ -890,7 +888,11 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 if __name__ == '__main__':
     try:
         setup()
+        import stagger
         main()
+    except ImportError:
+        logging.critical("Couldn't import stagger! Please check.")
+        sys.exit(3)
     except:
         # if happens something that we didn't foresee,
         # print traceback to the log
