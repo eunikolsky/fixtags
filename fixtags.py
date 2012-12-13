@@ -360,7 +360,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.write(episode_fname)
 
-    elif channel_title == 'English as a Second Language Podcast':
+    elif channel_title.startswith('English as a Second Language Podcast'):
         # move v2.2 to v2.4 tags
         tag22 = stagger.read_tag(episode_fname)
         tag2 = stagger.Tag24()
