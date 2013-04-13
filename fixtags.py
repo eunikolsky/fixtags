@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Author: pluton <pluton.od (at) gmail.com>
 # License: GPL v3
