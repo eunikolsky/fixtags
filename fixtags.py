@@ -8,14 +8,40 @@ import sys
 import logging
 import datetime
 
+logger = None
 episode_fname = ''
 
-def setup():
-    '''Set up the logging system.'''
 
+def setupLogging():
+    '''Set up the logging system.
+
+    Use the global `logger` object to log events in the app.
+    '''
+
+    global logger
+    logger = logging.getLogger(sys.argv[0])
+    logger.setLevel(logging.DEBUG)
+
+    # use file output
     LOG_FILENAME = os.path.join(os.path.dirname(sys.argv[0]), 'fixtags.log')
-    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG,
-            format="%(asctime)s - %(message)s")
+    filelog = logging.FileHandler(LOG_FILENAME, 'a')
+    filelog.setLevel(logging.DEBUG)
+
+    # use console
+    conlog = logging.StreamHandler()
+    conlog.setLevel(logging.DEBUG)
+
+    # specify log formatting
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(lineno)s - %(levelname)s - %(message)s")
+    conlog.setFormatter(formatter)
+    filelog.setFormatter(formatter)
+
+    logger.addHandler(conlog)
+    logger.addHandler(filelog)
+
+def setup():
+    '''Initialize the app.'''
+    setupLogging()
 
 def main():
     # get episode info from the environment variables
@@ -235,7 +261,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Радио Бермудский Треугольник':
         # don't know what to do. it seems the podcast has changeable tags
-        logging.warning('Please check the latest episode of {0}'.format(
+        logger.warning('Please check the latest episode of {0}'.format(
             channel_title))
         #tag2 = stagger.read_tag(episode_fname)
         #tag2.title = tag2.album
@@ -898,7 +924,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     else:
-        logging.info("No fixes for the episode. GPODDER_EPISODE_TITLE='{0}' "
+        logger.info("No fixes for the episode. GPODDER_EPISODE_TITLE='{0}' "
             "GPODDER_EPISODE_FILENAME='{1}' GPODDER_CHANNEL_TITLE='{2}' "
             "GPODDER_EPISODE_PUBDATE='{3}'".format(episode_title,
                 episode_fname, channel_title, episode_pubdate))
@@ -909,12 +935,12 @@ if __name__ == '__main__':
         import stagger
         main()
     except ImportError:
-        logging.critical("Couldn't import stagger! Please check.")
+        logger.critical("Couldn't import stagger! Please check.")
         sys.exit(3)
     except:
         # if happens something that we didn't foresee,
         # print traceback to the log
         import traceback
-        logging.exception("An exception occurred with file '{}'".format(episode_fname))
+        logger.exception("An exception occurred with file '{}'".format(episode_fname))
         sys.exit(2)
 
