@@ -12,6 +12,11 @@ logger = None
 episode_fname = ''
 
 
+class WrongInvocationError(Exception):
+    '''This error is thrown when the script is invoked not from gPodder.'''
+    pass
+
+
 def setupLogging():
     '''Set up the logging system.
 
@@ -54,7 +59,7 @@ def main():
     except KeyError:
         print("""This script should be run by gPodder. Put its path and filename ({0}) as the argument to 'cmd_download_complete' option.
 For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stretching_.28making_playback_slower_or_faster.29', the 'Using the post-download script hook' section.""".format(os.path.abspath(sys.argv[0])), file=sys.stderr)
-        sys.exit(1)
+        raise WrongInvocationError()
     #print('Processing {0}'.format(episode_fname))
 
     # calculate the publication year
@@ -937,6 +942,9 @@ if __name__ == '__main__':
     except ImportError:
         logger.critical("Couldn't import stagger! Please check.")
         sys.exit(3)
+    except WrongInvocationError:
+        # don't panic on this error
+        pass
     except:
         # if happens something that we didn't foresee,
         # print traceback to the log
