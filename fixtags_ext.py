@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
+from subprocess import Popen, PIPE
+
 import gpodder
 
 # Use a logger for debug output - this will be managed by gPodder
@@ -14,10 +17,10 @@ __category__ = 'post-download'
 
 # Keys for the internal info dictionary.
 class Key:
-    FILENAME = 'filename'
-    EPISODE_TITLE = 'episode_title'
-    CHANNEL_TITLE = 'channel_title'
-    EPISODE_PUBDATE = 'episode_pubdate'
+    FILENAME = 'GPODDER_EPISODE_FILENAME'
+    EPISODE_TITLE = 'GPODDER_EPISODE_TITLE'
+    CHANNEL_TITLE = 'GPODDER_CHANNEL_TITLE'
+    EPISODE_PUBDATE = 'GPODDER_EPISODE_PUBDATE'
 
 class gPodderExtension:
     # The extension will be instantiated the first time it's used
@@ -37,6 +40,33 @@ class gPodderExtension:
                     info[Key.EPISODE_TITLE],
                     info[Key.CHANNEL_TITLE],
                     info[Key.EPISODE_PUBDATE]))
+
+        cmd = os.path.expanduser("~/bin/fixtags/fixtags.py")
+        self.run_external_command(cmd, info)
+
+    # Runs the specified external command with the specific environment
+    # variables that are added to the ones of the current process.
+    def run_external_command(self, cmd, env):
+        # prepare the environment for a subprocess
+        penv = os.environ.copy()
+        if env is not None:
+            for k, v in env.iteritems():
+                penv[k] = str(v)
+        # OS X specific: when gPodder is started from a bundle (.app file)
+        # the bootstrap script sets PYTHON, PYTHONPATH, and PYTHONHOME
+        # env vars to point to the bundled python 2. Thus, an attempt to
+        # launch a python 3 script fails:
+        # "Fatal Python error: Py_Initialize: unable to load the file system codec"
+        # Here we remove all these variables before starting a subprocess.
+        penv = dict((k, v) for k, v in penv.iteritems()
+                if not k.startswith("PYTHON"))
+
+        logger.info(u'starting subprocess "%s"' % (cmd))
+        proc = Popen(cmd, env=penv, shell=True, stdout=PIPE, stderr=PIPE)
+        (stdoutdata, stderrdata) = proc.communicate()
+
+        logger.info(u'returncode = %d\nstdout = "%s"\nstderr = "%s"' %
+                (proc.returncode, stdoutdata, stderrdata))
 
     # Gets necessary info from the episode object into a dictionary with
     # the keys specified earlier. The keys actually correspond to the values
