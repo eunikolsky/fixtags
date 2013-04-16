@@ -12,6 +12,13 @@ __description__ = 'Fixes mp3 tags in podcasts for Sandisk music players.'
 __authors__ = 'Eugene Nikolsky <pluton.od@gmail.com>'
 __category__ = 'post-download'
 
+# Keys for the internal info dictionary.
+class Key:
+    FILENAME = 'filename'
+    EPISODE_TITLE = 'episode_title'
+    CHANNEL_TITLE = 'channel_title'
+    EPISODE_PUBDATE = 'episode_pubdate'
+
 class gPodderExtension:
     # The extension will be instantiated the first time it's used
     # You can do some sanity checks here and raise an Exception if
@@ -21,10 +28,34 @@ class gPodderExtension:
 
     # This function is called when an episode has been downloaded.
     # The episode param is a gpodder.model.PodcastEpisode instance.
-    # You can retrieve the filename via episode.local_filename(False).
     def on_episode_downloaded(self, episode):
-        filename = episode.local_filename(create=False, check_only=True)
-        logger.info(u'on_episode_downloaded(%s)' % (filename))
+        info = self.get_episode_info(episode)
+        logger.info(u'on_episode_downloaded (filename="%s", '
+                u'episode_title="%s", channel_title="%s", '
+                u'episode_pubdate="%d")' %
+                (info[Key.FILENAME],
+                    info[Key.EPISODE_TITLE],
+                    info[Key.CHANNEL_TITLE],
+                    info[Key.EPISODE_PUBDATE]))
+
+    # Gets necessary info from the episode object into a dictionary with
+    # the keys specified earlier. The keys actually correspond to the values
+    # gPodder 2 used when calling an external post-download script.
+    def get_episode_info(self, episode):
+        info = {
+                Key.FILENAME: None,
+                Key.EPISODE_TITLE: None,
+                Key.CHANNEL_TITLE: None,
+                Key.EPISODE_PUBDATE: None
+        }
+
+        info[Key.FILENAME] = episode.local_filename(create=False,
+                check_only=True)
+        info[Key.EPISODE_TITLE] = episode.trimmed_title
+        info[Key.CHANNEL_TITLE] = episode.channel.title
+        info[Key.EPISODE_PUBDATE] = episode.published
+
+        return info
 
     # This function will be called when the extension is enabled or
     # loaded. This is when you want to create helper objects or hook
