@@ -15,6 +15,16 @@ __description__ = 'Fixes mp3 tags in podcasts for Sandisk music players.'
 __authors__ = 'Eugene Nikolsky <pluton.od@gmail.com>'
 __category__ = 'post-download'
 
+# Keys for the extension's config
+class ConfigKey:
+    FIXTAGS_CMD = 'fixtags_cmd'
+
+# Sets the extension's config with default options.
+DefaultConfig = {
+    ConfigKey.FIXTAGS_CMD: ''
+}
+
+
 # Keys for the internal info dictionary.
 class Key:
     FILENAME = 'GPODDER_EPISODE_FILENAME'
@@ -41,8 +51,13 @@ class gPodderExtension:
                     info[Key.CHANNEL_TITLE],
                     info[Key.EPISODE_PUBDATE]))
 
-        cmd = os.path.expanduser("~/bin/fixtags/fixtags.py")
-        self.run_external_command(cmd, info)
+        rawcmd = self.container.config.fixtags_cmd
+        if (rawcmd is not None) and (len(rawcmd) > 0):
+            cmd = os.path.expanduser(rawcmd)
+            self.run_external_command(cmd, info)
+        else:
+            logger.warn(u'External command (key "%s" in config) is not set' %
+                    ConfigKey.FIXTAGS_CMD)
 
     # Runs the specified external command with the specific environment
     # variables that are added to the ones of the current process.
