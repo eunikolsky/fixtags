@@ -56,8 +56,8 @@ class gPodderExtension:
             cmd = os.path.expanduser(rawcmd)
             self.run_external_command(cmd, info)
         else:
-            logger.warn(u'External command (key "%s" in config) is not set' %
-                    ConfigKey.FIXTAGS_CMD)
+            logger.warn(u'External command (key "%s.%s" in config) is not set' %
+                    (self.container.config._name, ConfigKey.FIXTAGS_CMD))
 
     # Runs the specified external command with the specific environment
     # variables that are added to the ones of the current process.
