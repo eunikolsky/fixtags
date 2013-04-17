@@ -102,24 +102,3 @@ class gPodderExtension:
 
         return info
 
-    # This function will be called when the extension is enabled or
-    # loaded. This is when you want to create helper objects or hook
-    # into various parts of gPodder.
-    #def on_load(self):
-        #logger.info('Extension is being loaded.')
-        #print '='*40
-        #print 'container:', self.container
-        #print 'container.manager:', self.container.manager
-        #print 'container.config:', self.container.config
-        #print 'container.manager.core:', self.container.manager.core
-        #print 'container.manager.core.db:', self.container.manager.core.db
-        #print 'container.manager.core.config:', self.container.manager.core.config
-        #print 'container.manager.core.model:', self.container.manager.core.model
-        #print '='*40
-
-    # This function will be called when the extension is disabled or
-    # when gPodder shuts down. You can use this to destroy/delete any
-    # objects that you created in on_load().
-    #def on_unload(self):
-        #logger.info('Extension is being unloaded.')
-
