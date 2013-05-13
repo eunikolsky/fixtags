@@ -55,7 +55,7 @@ def main():
         episode_title = os.environ['GPODDER_EPISODE_TITLE']
         episode_fname = os.environ['GPODDER_EPISODE_FILENAME']
         channel_title = os.environ['GPODDER_CHANNEL_TITLE']
-        episode_pubdate = int(os.environ['GPODDER_EPISODE_PUBDATE'])
+        episode_pubdate = int(float(os.environ['GPODDER_EPISODE_PUBDATE']))
     except KeyError:
         print("""This script should be run by gPodder. Put its path and filename ({0}) as the argument to 'cmd_download_complete' option.
 For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stretching_.28making_playback_slower_or_faster.29', the 'Using the post-download script hook' section.""".format(os.path.abspath(sys.argv[0])), file=sys.stderr)
