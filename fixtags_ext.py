@@ -80,8 +80,12 @@ class gPodderExtension:
         proc = Popen(cmd, env=penv, shell=True, stdout=PIPE, stderr=PIPE)
         (stdoutdata, stderrdata) = proc.communicate()
 
-        logger.info(u'returncode = %d\nstdout = "%s"\nstderr = "%s"' %
-                (proc.returncode, stdoutdata, stderrdata))
+        logger.info(u'stdout = "%s"' % stdoutdata)
+        proc_successful = (((stderrdata is None) or (len(stderrdata) == 0)) and
+                (proc.returncode == 0))
+        if not proc_successful:
+            logger.error(u'subprocess "%s", returncode = %d\nstderr = "%s"' %
+                    (cmd, proc.returncode, stderrdata))
 
     # Gets necessary info from the episode object into a dictionary with
     # the keys specified earlier. The keys actually correspond to the values
