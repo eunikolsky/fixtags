@@ -670,10 +670,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         except stagger.errors.NoTagError:
             tag2 = stagger.Tag24()
         import re
-        parts = re.search(r'^\#(\d{1,3}) ([^-]+) - (.+)$', episode_title,
-                flags=re.IGNORECASE)
-        tag2.title = parts.group(3)
-        tag2.artist = parts.group(2)
+        parts = re.search(r'^\#(\d{1,3}) (?:[-–] )?([^-–]+) [-–] (.+)$',
+                episode_title, flags=re.IGNORECASE)
+        tag2.title = parts.group(3) if parts else episode_title
+        tag2.artist = parts.group(2) if parts else 'Steve and Alex'
         #tag2.track = parts.group(1)
         tag2.genre = 'Podcast'
         tag2.album = channel_title
