@@ -844,6 +844,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
+    elif channel_title == 'The raywenderlich.com Podcast':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.genre = 'Podcast'
+        tag2.write()
+
     elif channel_title == 'Healthcare IT Podcast':
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
@@ -961,10 +967,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         pass
 
     elif channel_title == 'Build Phase':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'The raywenderlich.com Podcast':
         # nothing to fix here
         pass
 
