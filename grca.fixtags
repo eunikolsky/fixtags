@@ -1,0 +1,13 @@
+# colorizing config for grc
+# http://korpus.juls.savba.sk/~garabik/software/grc.html
+# use like this: `grcat grca.fixtags < fixtags.log`
+
+regexp=.*(CRITICAL|ERROR).*
+colours=red
+===
+regexp=.*WARNING.*
+colours=yellow
+===
+# light cyan
+regexp=.*INFO.*
+colours="\033[1;36m"
