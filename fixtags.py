@@ -255,7 +255,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             tag2 = stagger.read_tag(episode_fname)
         except stagger.errors.NoTagError:
             tag2 = stagger.Tag24()
-        tag2.artist = 'Dee Simon, Lance Wackerle'
+        tag2.artist = 'Dee and Harrison'
         tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.title = episode_title
