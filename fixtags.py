@@ -277,13 +277,16 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.write()
 
     elif channel_title == 'Радио Бермудский Треугольник':
-        # don't know what to do. it seems the podcast has changeable tags
-        logger.warning('Please check the latest episode of {0}'.format(
-            channel_title))
-        #tag2 = stagger.read_tag(episode_fname)
-        #tag2.title = tag2.album
-        #tag2.album = channel_title
-        #tag2.write()
+        try:
+            tag2 = stagger.read_tag(episode_fname)
+        except stagger.errors.NoTagError:
+            tag2 = stagger.Tag24()
+        tag2.artist = 'Наташа, Оля, Даник'
+        tag2.title = episode_title
+        tag2.album = channel_title
+        tag2.genre = 'Podcast'
+        tag2.date = episode_year
+        tag2.write()
 
     elif channel_title == 'This American Life':
         # fix some v2 tags
