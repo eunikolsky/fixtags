@@ -962,6 +962,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.picture = []
         tag2.write()
 
+    elif channel_title == 'Debug':
+        # remove picture element from v2.2
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.picture = []
+        tag2.write()
+
     elif channel_title == 'UWP - Eженедельный подкаст от Umputun':
         # nothing to fix here
         pass
