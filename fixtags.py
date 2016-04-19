@@ -948,10 +948,13 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Manager Tools':
         # remove picture element from v2.2 and fix date
-        tag2 = stagger.read_tag(episode_fname)
+        try:
+            tag2 = stagger.read_tag(episode_fname)
+        except stagger.errors.NoTagError:
+            tag2 = stagger.Tag24()
         tag2.picture = []
         tag2.date = episode_year
-        tag2.write()
+        tag2.write(episode_fname)
 
     elif channel_title == 'Career Tools':
         # remove picture element from v2.2
