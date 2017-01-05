@@ -639,9 +639,17 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Software Engineering Radio':
         # fix some v2 tags
+        import re
+        parts = re.search(r'^SE-Radio Episode (\d{1,4}): (.*)$', episode_title,
+                flags=re.IGNORECASE)
+
         tag2 = stagger.read_tag(episode_fname)
         tag2.album = channel_title
         tag2.genre = 'Podcast'
+        if parts:
+            track = parts.group(1)
+            tag2.track = track
+            tag2.title = "{0}: {1}".format(track, parts.group(2))
         tag2.write()
 
     elif channel_title == 'Ирландское рагу by Emaster':
