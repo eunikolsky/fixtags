@@ -251,6 +251,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Sick and Wrong':
         # fix some v2 tags
+        import re
+        parts = re.search(r'^Sick and Wrong Episode (\d{1,4})$', episode_title,
+                flags=re.IGNORECASE)
+
         try:
             tag2 = stagger.read_tag(episode_fname)
         except stagger.errors.NoTagError:
@@ -258,7 +262,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Dee and Harrison'
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        tag2.title = episode_title
+        tag2.title = parts.group(1) if parts else episode_title
         tag2.date = episode_year
         tag2.write(episode_fname)
 
