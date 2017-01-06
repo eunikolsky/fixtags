@@ -74,68 +74,11 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     episode_year = str(datetime.date.fromtimestamp(episode_pubdate).year)
 
     # the main set of checks
-    if channel_title == 'psychologist':
-        # read v1 tags and move them to v2, converting to utf-8 on the way
-        has_v1 = True
-        try:
-            tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
-        except stagger.errors.NoTagError:
-            # if there's no v1 tag, fill v2 from gPodder
-            has_v1 = False
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title[18:]
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        if has_v1:
-            tag2.artist = tag.artist
-            tag2.album = tag.album      # 'The PsychoPodcast'
-            tag2.comment = tag.comment
-            stagger.id3v1.Tag1.delete(episode_fname)
-        else:
-            tag2.artist = 'Mulder & Co'
-            tag2.album = 'The PsychoPodcast'
-        tag2.write(episode_fname)
-
-    elif channel_title == 'Институт разнородных вещиц':
-        # read v1 tags and move them to v2, converting to utf-8 on the way
-        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.artist = tag.artist
-        tag2.album = channel_title
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-
-    elif channel_title == 'Зомбо-Ящик':
-        # read v1 tags and move them to v2, converting to utf-8 on the way
-        tag = stagger.id3v1.Tag1.read(episode_fname, encoding='cp1251')
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title[27:]
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.artist = tag.artist
-        tag2.album = channel_title
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-
-    elif channel_title == 'Escape from Cubicle Nation Podcast':
+    if channel_title == 'Escape from Cubicle Nation Podcast':
         # set all v2 tags and remove v1
         tag2 = stagger.Tag24()
         tag2.title = episode_title
         tag2.artist = 'Pamela Slim'
-        tag2.album = channel_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-
-    elif channel_title == 'Начинающий инвестор':
-        # set all v2 tags and remove v1
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title
-        tag2.artist = 'Дмитрий Дмитриев'
         tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
@@ -180,16 +123,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
                 flags=re.IGNORECASE)
         tag2.title = parts.group(1)
         tag2.artist = parts.group(2)
-        tag2.album = channel_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.write(episode_fname)
-
-    elif channel_title == 'Wordmaster':
-        # set all v2 tags
-        tag2 = stagger.Tag24()
-        tag2.title = episode_title[12:]
-        tag2.artist = 'VOA'
         tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
@@ -347,14 +280,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
-    elif channel_title == 'Радио "Свободная Деревня"':
-        # fix some v2 tags and remove v1
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write()
-
     elif channel_title == 'Stuff Mom Never Told You':
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
@@ -392,17 +317,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
 
-    elif channel_title == 'Подкаст Кадры':
-        # move v2.2 to v2.4 tags
-        tag22 = stagger.read_tag(episode_fname)
-        tag2 = stagger.Tag24()
-        tag2.artist = tag22.artist
-        tag2.album = channel_title
-        tag2.title = tag22.title[14:]
-        tag2.genre = 'Podcast'
-        tag2.date = tag22.date
-        tag2.write(episode_fname)
-
     elif channel_title == 'Machine of Death':
         # move v2.2 to v2.4 tags
         tag22 = stagger.read_tag(episode_fname)
@@ -425,13 +339,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.comment = tag22.comment
         tag2.write(episode_fname)
-
-    elif channel_title == 'www.BreakingNewsEnglish.com':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.write()
 
     elif channel_title == 'Wide Teams':
         # fix some v2 tags
@@ -513,16 +420,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
-    elif channel_title == 'ЗаБугром Podcast':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title
-        tag2.artist = 'Costya (aka sway)'
-        tag2.album = channel_title
-        tag2.genre = 'Podcast'
-        tag2['COM'] = []
-        tag2.write()
-
     elif channel_title == 'All In The Mind':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
@@ -584,17 +481,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'dugwin'
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write()
-
-    elif channel_title == 'edUKation.com.ua':
-        # fix some v2 tags and remove v1
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title[22:]
-        tag2.artist = 'Дмитрий Дмитриев'
-        tag2.album = channel_title
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
@@ -714,16 +600,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
-    elif channel_title == 'Just Vocabulary':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title
-        tag2.artist = 'Jan Folmer'
-        tag2.album = channel_title
-        tag2.genre = 'Podcast'
-        tag2['COM'] = []
-        tag2.write()
-
     elif channel_title == 'PODъезд. Записки со всего света':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
@@ -776,12 +652,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
-    elif channel_title == 'Неуёмная жажда жизни!':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.genre = 'Podcast'
-        tag2.write()
-
     elif channel_title == 'scene':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
@@ -795,12 +665,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.title = episode_title
         tag2.genre = 'Podcast'
-        tag2.write()
-
-    elif channel_title == 'The English We Speak':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title[22:]
         tag2.write()
 
     elif channel_title == 'Nunavut':
@@ -824,13 +688,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2 = stagger.read_tag(episode_fname)
         tag2.artist = 'Alex'
         tag2.album = channel_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.write()
-
-    elif channel_title == 'Заметки о Qt':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write()
@@ -899,12 +756,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
-    elif channel_title == 'Coffee Break':
-        # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.genre = 'Podcast'
-        tag2.write()
-
     elif channel_title == 'Russian Canadian Moose PodCast':
         # fix some v2 tags
         import re
@@ -948,26 +799,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.write()
 
-    elif channel_title == 'Healthcare IT Podcast':
-        # fix some v2 tags and remove v1
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title
-        tag2.album = channel_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write()
-
-    elif channel_title == 'Подкаст 42':
-        # fix some v2 tags and remove v1
-        tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title
-        tag2.album = channel_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write()
-
     elif channel_title == 'The World in Words':
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
@@ -1006,23 +837,16 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.write()
 
     elif ((channel_title == 'UWP - Eженедельный подкаст от Umputun')
-            or (channel_title == 'Talk About English (Learn English)')
-            or (channel_title == 'Раша: Азбука Выживания')
             or (channel_title == 'Discovery')
             or (channel_title == 'Охотник За Головами - Денис aka Radio Grinch')
-            or (channel_title == '6 Minute English')
-            or (channel_title == 'Learn English with BBCRussian')
             or (channel_title == 'The Java Posse')
             or (channel_title == 'Эксперт-шоу Рунетология')
-            or (channel_title == 'Friday Night Comedy from BBC Radio 4')
             or (channel_title == 'The Skeptics Guide to the Universe')
             or (channel_title == 'this WEEK in TECH')
             or (channel_title == 'Radio Grinch')
             or (channel_title == 'Adam Curry\'s Daily Source Code')
-            or (channel_title == 'Секспертиза')
             or (channel_title == 'Friends House')
             or (channel_title == 'Security Now!')
-            or (channel_title == 'Software Indie')
             or (channel_title == 'Build Phase')
             or (channel_title == 'Functional Geekery')
             or (channel_title == 'TechSNAP MP3')
