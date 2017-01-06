@@ -1005,95 +1005,29 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write()
 
-    elif channel_title == 'UWP - Eженедельный подкаст от Umputun':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Talk About English (Learn English)':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Раша: Азбука Выживания':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Discovery':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Охотник За Головами - Денис aka Radio Grinch':
-        # nothing to fix here
-        pass
-
-    elif channel_title == '6 Minute English':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Learn English with BBCRussian':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'The Java Posse':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Эксперт-шоу Рунетология':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Friday Night Comedy from BBC Radio 4':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'The Skeptics Guide to the Universe':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'this WEEK in TECH':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Radio Grinch':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Adam Curry\'s Daily Source Code':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Секспертиза':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Friends House':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Security Now!':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Software Indie':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Build Phase':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Functional Geekery':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'TechSNAP MP3':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'Triangulation (MP3)':
-        # nothing to fix here
-        pass
-
-    elif channel_title == 'DevZen Podcast':
+    elif ((channel_title == 'UWP - Eженедельный подкаст от Umputun')
+            or (channel_title == 'Talk About English (Learn English)')
+            or (channel_title == 'Раша: Азбука Выживания')
+            or (channel_title == 'Discovery')
+            or (channel_title == 'Охотник За Головами - Денис aka Radio Grinch')
+            or (channel_title == '6 Minute English')
+            or (channel_title == 'Learn English with BBCRussian')
+            or (channel_title == 'The Java Posse')
+            or (channel_title == 'Эксперт-шоу Рунетология')
+            or (channel_title == 'Friday Night Comedy from BBC Radio 4')
+            or (channel_title == 'The Skeptics Guide to the Universe')
+            or (channel_title == 'this WEEK in TECH')
+            or (channel_title == 'Radio Grinch')
+            or (channel_title == 'Adam Curry\'s Daily Source Code')
+            or (channel_title == 'Секспертиза')
+            or (channel_title == 'Friends House')
+            or (channel_title == 'Security Now!')
+            or (channel_title == 'Software Indie')
+            or (channel_title == 'Build Phase')
+            or (channel_title == 'Functional Geekery')
+            or (channel_title == 'TechSNAP MP3')
+            or (channel_title == 'Triangulation (MP3)')
+            or (channel_title == 'DevZen Podcast')):
         # nothing to fix here
         pass
 
