@@ -48,6 +48,14 @@ def setup():
     '''Initialize the app.'''
     setupLogging()
 
+def trim_prefix(episode_title, prefix):
+    '''Returns the episode_title without the prefix if it starts with
+    the prefix or the whole string otherwise.'''
+
+    return (episode_title[len(prefix):]
+        if episode_title.startswith(prefix)
+        else episode_title)
+
 def main():
     # get episode info from the environment variables
     global episode_fname
@@ -251,10 +259,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Sick and Wrong':
         # fix some v2 tags
-        import re
-        parts = re.search(r'^Sick and Wrong Episode (\d{1,4})$', episode_title,
-                flags=re.IGNORECASE)
-
         try:
             tag2 = stagger.read_tag(episode_fname)
         except stagger.errors.NoTagError:
@@ -262,7 +266,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Dee and Harrison'
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        tag2.title = parts.group(1) if parts else episode_title
+        tag2.title = trim_prefix(episode_title, 'Sick and Wrong ')
         tag2.date = episode_year
         tag2.write(episode_fname)
 
@@ -639,17 +643,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Software Engineering Radio':
         # fix some v2 tags
-        import re
-        parts = re.search(r'^SE-Radio Episode (\d{1,4}): (.*)$', episode_title,
-                flags=re.IGNORECASE)
-
         tag2 = stagger.read_tag(episode_fname)
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        if parts:
-            track = parts.group(1)
-            tag2.track = track
-            tag2.title = "{0}: {1}".format(track, parts.group(2))
+        tag2.title = trim_prefix(episode_title, 'SE-Radio Episode ')
         tag2.write()
 
     elif channel_title == 'Ирландское рагу by Emaster':
