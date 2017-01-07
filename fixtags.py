@@ -50,7 +50,13 @@ def setup():
 
 def trim_prefix(episode_title, prefix):
     '''Returns the episode_title without the prefix if it starts with
-    the prefix or the whole string otherwise.'''
+    the prefix or the whole string otherwise.
+
+    >>> trim_prefix('prefix title', 'prefix ')
+    'title'
+    >>> trim_prefix('prefix_title', 'prefix ')
+    'prefix_title'
+    '''
 
     return (episode_title[len(prefix):]
         if episode_title.startswith(prefix)
