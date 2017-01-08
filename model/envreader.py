@@ -17,3 +17,7 @@ def get_episode_info(environ):
 
     KEYS = ['GPODDER_EPISODE_TITLE', 'GPODDER_EPISODE_FILENAME']
     return EpisodeInfo(*map(environ.get, KEYS))
+
+# Getter functions
+episode_title = lambda x: x.episode_title
+episode_filename = lambda x: x.episode_filename

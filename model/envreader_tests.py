@@ -7,6 +7,9 @@ import unittest
 class _TestEnvReader_Base(unittest.TestCase):
     '''Base class providing helpers to verify EpisodeInfo.'''
 
+    def verify_with_env(self, assertion, field, environ):
+        assertion(field(envreader.get_episode_info(environ)))
+
     def assertEqualC(self, x):
         '''Curried version of `assertEqual`.'''
         def _assertEqualC(y):
@@ -31,8 +34,7 @@ class TestEnvReader_EpisodeTitle(_TestEnvReader_Base):
         self._verify_title_env(assertion, fake_environ)
 
     def _verify_title_env(self, assertion, fake_environ):
-        info = envreader.get_episode_info(fake_environ)
-        assertion(info.episode_title)
+        self.verify_with_env(assertion, envreader.episode_title, fake_environ)
 
     def _get_fake_environ(self, episode_title):
         return {'GPODDER_EPISODE_TITLE': episode_title}
@@ -55,8 +57,7 @@ class TestEnvReader_EpisodeFilename(_TestEnvReader_Base):
         self._verify_filename_env(assertion, fake_environ)
 
     def _verify_filename_env(self, assertion, fake_environ):
-        info = envreader.get_episode_info(fake_environ)
-        assertion(info.episode_filename)
+        self.verify_with_env(assertion, envreader.episode_filename, fake_environ)
 
     def _get_fake_environ(self, episode_title):
         return {'GPODDER_EPISODE_FILENAME': episode_title}
