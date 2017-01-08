@@ -2,7 +2,8 @@
 
 import collections
 
-EpisodeInfo = collections.namedtuple('EpisodeInfo', ['episode_title'])
+EpisodeInfo = collections.namedtuple('EpisodeInfo',
+        ['episode_title', 'episode_filename'])
 '''A tuple containing episode information from gPodder.'''
 
 def get_episode_info(environ):
@@ -14,4 +15,7 @@ def get_episode_info(environ):
             with `os.environ`.
     '''
 
-    return EpisodeInfo(environ.get('GPODDER_EPISODE_TITLE'))
+    return EpisodeInfo(
+            environ.get('GPODDER_EPISODE_TITLE'),
+            environ.get('GPODDER_EPISODE_FILENAME')
+            )
