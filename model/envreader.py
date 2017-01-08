@@ -15,7 +15,5 @@ def get_episode_info(environ):
             with `os.environ`.
     '''
 
-    return EpisodeInfo(
-            environ.get('GPODDER_EPISODE_TITLE'),
-            environ.get('GPODDER_EPISODE_FILENAME')
-            )
+    KEYS = ['GPODDER_EPISODE_TITLE', 'GPODDER_EPISODE_FILENAME']
+    return EpisodeInfo(*map(environ.get, KEYS))
