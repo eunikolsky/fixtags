@@ -6,30 +6,33 @@ import unittest
 
 class TestEnvReader_EpisodeTitle(unittest.TestCase):
     def test_should_be_set_from_environ(self):
-        anonymousTitle = 'anonymousTitle'
-        fake_environ = self._get_fake_environ(anonymousTitle)
-
-        info = envreader.get_episode_info(fake_environ)
-
-        self.assertEqual(info.episode_title, anonymousTitle)
+        self._verify_equal_title('anonymousTitle')
 
     def test_should_be_empty_when_empty(self):
-        emptyTitle = ''
-        fake_environ = self._get_fake_environ(emptyTitle)
-
-        info = envreader.get_episode_info(fake_environ)
-
-        self.assertEqual(info.episode_title, emptyTitle)
+        self._verify_equal_title('')
 
     def test_should_be_None_when_missing(self):
-        fake_environ = {}
+        self._verify_title_env(self.assertIsNone, {})
 
+    def _verify_equal_title(self, title):
+        self._verify_title(self.assertEqualC(title), title)
+
+    def _verify_title(self, assertion, title):
+        fake_environ = self._get_fake_environ(title)
+        self._verify_title_env(assertion, fake_environ)
+
+    def _verify_title_env(self, assertion, fake_environ):
         info = envreader.get_episode_info(fake_environ)
-
-        self.assertIsNone(info.episode_title)
+        assertion(info.episode_title)
 
     def _get_fake_environ(self, episode_title):
         return {'GPODDER_EPISODE_TITLE': episode_title}
+
+    def assertEqualC(self, x):
+        '''Curried version of `assertEqual`.'''
+        def _assertEqualC(y):
+            self.assertEqual(x, y)
+        return _assertEqualC
 
 class TestEnvReader_EpisodeFilename(unittest.TestCase):
     def test_should_be_set_from_environ(self):
