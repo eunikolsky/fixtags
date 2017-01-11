@@ -2,13 +2,15 @@
 
 import collections
 
-EpisodeInfo = collections.namedtuple('EpisodeInfo',
+RawEpisodeInfo = collections.namedtuple('RawEpisodeInfo',
         ['episode_title', 'episode_filename', 'podcast_title', 'episode_timestamp'])
-'''A tuple containing episode information from gPodder.'''
+'''A tuple containing raw, parse episode information from gPodder.'''
 
 def get_episode_info(environ):
     '''Reads episode information, supplied by gPodder via environment
     variables.
+
+    `get_episode_info :: Dict -> RawEpisodeInfo`
 
     Args:
         environ (Dict): The environment variables dictionary, compatible
@@ -25,7 +27,7 @@ def get_episode_info(environ):
             'GPODDER_EPISODE_FILENAME',
             'GPODDER_CHANNEL_TITLE']
     pubdate = parse_timestamp('GPODDER_EPISODE_PUBDATE')
-    return EpisodeInfo(*map(environ.get, KEYS), pubdate)
+    return RawEpisodeInfo(*map(environ.get, KEYS), pubdate)
 
 # Getter functions
 episode_title = lambda x: x.episode_title

@@ -5,7 +5,7 @@ import envreader
 import unittest
 
 class _TestEnvReader_Base(unittest.TestCase):
-    '''Base class providing helpers to verify EpisodeInfo.'''
+    '''Base class providing helpers to verify RawEpisodeInfo.'''
 
     def verify_with_env(self, assertion, field, environ):
         assertion(field(envreader.get_episode_info(environ)))
