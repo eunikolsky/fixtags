@@ -17,5 +17,16 @@ class TestEnvValidator(unittest.TestCase):
         validated = envvalidator.validate_episode_info(info)
         self.assertIsNone(validated)
 
+    def test_should_copy_episode_filename(self):
+        anonymousFilename = 'anonymousFilename'
+        info = RawEpisodeInfo('', anonymousFilename, '', 0)
+        validated = envvalidator.validate_episode_info(info)
+        self.assertEqual(validated.episode_filename, anonymousFilename)
+
+    def test_no_episode_filename_should_return_None(self):
+        info = RawEpisodeInfo('', None, '', 0)
+        validated = envvalidator.validate_episode_info(info)
+        self.assertIsNone(validated)
+
 if __name__ == '__main__':
     unittest.main()
