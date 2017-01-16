@@ -39,5 +39,15 @@ class TestEnvValidator(unittest.TestCase):
         validated = envvalidator.validate_episode_info(info)
         self.assertIsNone(validated)
 
+    def test_should_convert_timestamp_to_year(self):
+        info = RawEpisodeInfo('', '', '', 1583025003)
+        validated = envvalidator.validate_episode_info(info)
+        self.assertEqual(validated.episode_year, 2020)
+
+    def test_no_timestamp_should_return_None(self):
+        info = RawEpisodeInfo('', '', '', None)
+        validated = envvalidator.validate_episode_info(info)
+        self.assertIsNone(validated)
+
 if __name__ == '__main__':
     unittest.main()
