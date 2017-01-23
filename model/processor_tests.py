@@ -5,8 +5,8 @@ from processor import EpisodeFix, EpisodeTags, process, post_process
 
 import unittest
 
-def _episode_tags(genre=None, year=None):
-    return EpisodeTags(genre=genre, year=year)
+def _episode_tags(album=None, genre=None, year=None):
+    return EpisodeTags(album=album, genre=genre, year=year)
 
 class TestProcessor(unittest.TestCase):
     def test_should_return_None_when_no_fixes(self):
@@ -87,6 +87,20 @@ class TestPostProcessor(unittest.TestCase):
         tags = _episode_tags(genre=None)
         ptags = post_process(info, tags)
         self.assertEqual(ptags.genre, 'Podcast')
+
+    def test_should_set_album_to_podcast_title_if_None(self):
+        anonymousPodcastTitle = 'Foo'
+        info = EpisodeInfo('', '', anonymousPodcastTitle, 0)
+        tags = _episode_tags(album=None)
+        ptags = post_process(info, tags)
+        self.assertEqual(ptags.album, anonymousPodcastTitle)
+
+    def test_should_keep_album_if_set(self):
+        info = EpisodeInfo('', '', '', 0)
+        anonymousAlbum = 'Foo'
+        tags = _episode_tags(album=anonymousAlbum)
+        ptags = post_process(info, tags)
+        self.assertEqual(ptags.album, anonymousAlbum)
 
 if __name__ == '__main__':
     unittest.main()
