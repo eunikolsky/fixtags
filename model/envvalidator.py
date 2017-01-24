@@ -11,11 +11,14 @@ def validate_episode_info(raw):
     '''Validates the `RawEpisodeInfo` object and returns a valid
     `EpisodeInfo` object or `None`.
 
+    TODO return a list of errors if failed
+
     To be valid, the raw episode info must meet ALL of the criteria:
     * `episode_title` is not `None`
     * `episode_filename` is not `None`
     * `podcast_title` is not `None`
     * `episode_timestamp` is not `None`
+    * TODO check input types
 
     `validate_episode_info :: RawEpisodeInfo -> Maybe EpisodeInfo`
     '''

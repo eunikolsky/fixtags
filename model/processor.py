@@ -2,6 +2,7 @@
 
 import collections
 
+# TODO genre and year should not be passed to fixers?!
 EpisodeTags = collections.namedtuple('EpisodeTags', [
     'album'
     , 'genre'

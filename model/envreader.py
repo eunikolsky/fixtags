@@ -17,6 +17,7 @@ def get_episode_info(environ):
             with `os.environ`.
     '''
 
+    # TODO move string=>int parsing to env validator?
     def parse_timestamp(key):
         try:
             return int(environ[key])
