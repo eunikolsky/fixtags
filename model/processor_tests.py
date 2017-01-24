@@ -5,8 +5,12 @@ from processor import EpisodeFix, EpisodeTags, process, post_process
 
 import unittest
 
-def _episode_tags(album=None, genre=None, year=None):
-    return EpisodeTags(album=album, genre=genre, year=year)
+# TODO move closer to `EpisodeTags`
+def _episode_tags(album=None, artist=None, comment=None, composer=None,
+        genre=None, title=None, track_number=None, year=None):
+    return EpisodeTags(album=album, artist=artist, comment=comment,
+            composer=composer, genre=genre, title=title,
+            track_number=track_number, year=year)
 
 class TestProcessor(unittest.TestCase):
     def test_should_return_None_when_no_fixes(self):

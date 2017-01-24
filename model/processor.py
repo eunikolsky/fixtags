@@ -5,7 +5,12 @@ import collections
 # TODO genre and year should not be passed to fixers?!
 EpisodeTags = collections.namedtuple('EpisodeTags', [
     'album'
+    , 'artist'
+    , 'comment'
+    , 'composer'
     , 'genre'
+    , 'title'
+    , 'track_number'
     , 'year'
     ])
 '''Represents a set of tags for a podcast episode.'''
