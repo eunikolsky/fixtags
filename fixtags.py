@@ -851,8 +851,18 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.write()
 
     elif channel_title == 'Откровенно про IT-карьеризм':
-        # remove v1
+        # fix some v2 tags and remove v1
+        try:
+            tag2 = stagger.read_tag(episode_fname)
+        except stagger.errors.NoTagError:
+            tag2 = stagger.Tag24()
+        tag2.title = episode_title
+        tag2.artist = 'Михаил Марченко и Ольга Давыдова'
+        tag2.album = channel_title
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
+        tag2.write()
 
     elif channel_title == 'Manager Tools':
         # remove picture element from v2.2 and fix date
