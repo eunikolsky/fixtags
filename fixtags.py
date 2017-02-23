@@ -816,6 +816,13 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.write()
 
+    elif channel_title == 'Coffee Break German':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title
+        tag2.genre = 'Podcast'
+        tag2.write()
+
     elif channel_title == "JavaPubHouse Off-Heap's podcast":
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
