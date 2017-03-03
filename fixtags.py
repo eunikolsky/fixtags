@@ -902,7 +902,9 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'Functional Geekery')
             or (channel_title == 'TechSNAP MP3')
             or (channel_title == 'Triangulation (MP3)')
-            or (channel_title == 'DevZen Podcast')):
+            or (channel_title == 'DevZen Podcast')
+            or (channel_title == 'Programming Throwdown')
+            ):
         # nothing to fix here
         pass
 
