@@ -13,10 +13,13 @@ def stagger_read_tags(filepath):
     `stagger_read_tags :: FilePath -> EpisodeTags`
     """
 
-    tag = stagger.read_tag(filepath)
+    try:
+        tag = stagger.read_tag(filepath)
 
-    tag_or_none = lambda x: x if (x != '') and (x != 0) else None
-    fields = [tag.album, tag.artist, tag.comment, tag.composer, tag.genre,
-        tag.title, tag.track, tag.date]
+        tag_or_none = lambda x: x if (x != '') and (x != 0) else None
+        fields = [tag.album, tag.artist, tag.comment, tag.composer, tag.genre,
+                tag.title, tag.track, tag.date]
 
-    return EpisodeTags(*(tag_or_none(f) for f in fields))
+        return EpisodeTags(*(tag_or_none(f) for f in fields))
+    except stagger.errors.NoTagError:
+        return EpisodeTags(*([None] * len(EpisodeTags._fields)))
