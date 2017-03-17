@@ -23,3 +23,30 @@ def stagger_read_tags(filepath):
         return EpisodeTags(*(tag_or_none(f) for f in fields))
     except stagger.errors.NoTagError:
         return EpisodeTags(*([None] * len(EpisodeTags._fields)))
+
+def stagger_write_tags(filepath, tags):
+    """Write the `EpisodeTags` into the file at `filepath`.
+
+    Existing tags, if any, are left as is unless overwritten from `tags`.
+
+    `stagger_write_tags :: FilePath -> EpisodeTags -> ()`
+    """
+
+    def tag_key(episode_tags_key):
+        tags_map = {
+                'track_number': 'track',
+                'year': 'date',
+                }
+
+        return tags_map.get(episode_tags_key, episode_tags_key)
+
+    try:
+        tag2 = stagger.read_tag(filepath)
+    except stagger.errors.NoTagError:
+        tag2 = stagger.Tag24()
+
+    for (key, value) in tags._asdict().items():
+        if value is not None:
+            setattr(tag2, tag_key(key), value)
+
+    tag2.write(filepath)
