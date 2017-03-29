@@ -907,6 +907,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'Triangulation (MP3)')
             or (channel_title == 'DevZen Podcast')
             or (channel_title == 'Programming Throwdown')
+            or (channel_title == 'Slow German')
             ):
         # nothing to fix here
         pass
