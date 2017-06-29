@@ -796,7 +796,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'Бананы и линзы':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
+        tag2.title = episode_title
+        tag2.artist = channel_title
         tag2.album = channel_title
+        tag2.date = episode_year
         tag2.genre = 'Podcast'
         tag2.write()
 
