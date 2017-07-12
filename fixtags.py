@@ -285,6 +285,8 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Steven D. Levitt, Stephen J. Dubner'
         tag2.album = channel_title
         tag2.date = episode_year
+        del tag2['COMM']
+        del tag2['APIC']
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write()
