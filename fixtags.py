@@ -252,7 +252,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Ira Glass'
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        del tag2['PIC']
+        try:
+            del tag2['PIC']
+        except KeyError:
+            pass
         tag2.write()
 
     elif channel_title == 'Evergreen':
