@@ -244,7 +244,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.date = episode_year
-        tag2.write()
+        tag2.write(episode_fname)
 
     elif channel_title == 'This American Life':
         # fix some v2 tags
@@ -386,7 +386,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             tag2.date = episode_year
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        tag2.write()
+        tag2.write(episode_fname)
 
     elif channel_title == 'happy friday podcast from gAmUssA ;-)':
         # fix some v2 tags
@@ -907,7 +907,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.genre = 'Podcast'
         stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write()
+        tag2.write(episode_fname)
 
     elif channel_title == 'Manager Tools':
         # remove picture element from v2.2 and fix date
