@@ -530,8 +530,14 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.date = episode_year
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        del tag2['CTOC']
-        del tag2['CHAP']
+        try:
+            del tag2['CTOC']
+        except KeyError:
+            pass
+        try:
+            del tag2['CHAP']
+        except KeyError:
+            pass
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
