@@ -266,6 +266,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             del tag2['PIC']
         except KeyError:
             pass
+        try:
+            del tag2['APIC']
+        except KeyError:
+            pass
         tag2.write()
 
     elif channel_title == 'Evergreen':
