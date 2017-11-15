@@ -778,7 +778,16 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'The raywenderlich.com Podcast':
         # fix some v2 tags
+        import re
+        parts = re.search(r'^(.*) – Podcast (.+) (.+)$', episode_title,
+                flags=re.IGNORECASE)
+
         tag2 = stagger.read_tag(episode_fname)
+        if parts:
+            tag2.title = "{0}{1}: {2}".format(parts.group(2), parts.group(3),
+                    parts.group(1))
+        else:
+            tag2.title = episode_title
         tag2.genre = 'Podcast'
         tag2.write()
 
