@@ -905,6 +905,17 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.title = trim_prefix(tag2.title, 'Episode ')
         tag2.write()
 
+    elif channel_title == 'DevZen Podcast':
+        # fix some v2 tags
+        import re
+        parts = re.search(r'^(.*) — Episode (\d+)$', episode_title,
+                flags=re.IGNORECASE)
+
+        if parts:
+            tag2 = stagger.read_tag(episode_fname)
+            tag2.title = "{0}: {1}".format(parts.group(2), parts.group(1))
+            tag2.write()
+
     elif channel_title == 'Scalalaz Podcast':
         # remove picture element from v2.2 and fix some v2 tags
         try:
@@ -982,7 +993,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'Functional Geekery')
             or (channel_title == 'TechSNAP MP3')
             or (channel_title == 'Triangulation (MP3)')
-            or (channel_title == 'DevZen Podcast')
             or (channel_title == 'Slow German')
             ):
         # nothing to fix here
