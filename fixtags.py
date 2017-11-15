@@ -108,7 +108,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'The Stack Exchange Podcast':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
-        tag2.title = trim_prefix(episode_title, 'Stack Overflow Podcast ')
+        tag2.title = trim_prefix(episode_title, 'Podcast ')
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
 
@@ -216,7 +216,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Dee and Harrison'
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        tag2.title = trim_prefix(episode_title, 'Sick and Wrong ')
+        tag2.title = trim_prefix(episode_title, 'Episode ')
         tag2.date = episode_year
         tag2.write(episode_fname)
 
@@ -226,7 +226,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.artist = 'Dee and Harrison'
         tag2.album = channel_title
         tag2.genre = 'Podcast'
-        tag2.title = trim_prefix(episode_title, 'S&W ')
+        tag2.title = trim_prefix(episode_title, 'S&W Episode ')
         tag2.date = episode_year
         tag2.write(episode_fname)
 
@@ -275,7 +275,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == 'Evergreen':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title
+        tag2.title = trim_prefix(episode_title, 'Episode ')
         tag2.album = channel_title
         tag2.genre = 'Podcast'
         tag2.comment = ''
@@ -863,7 +863,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
     elif channel_title == "JavaPubHouse Off-Heap's podcast":
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
-        tag2.title = episode_title
+        tag2.title = trim_prefix(episode_title, 'Episode ')
         tag2.artist = 'Freddy Guime, et al.'
         tag2.album = channel_title
         tag2.date = episode_year
