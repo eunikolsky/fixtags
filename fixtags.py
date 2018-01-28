@@ -931,6 +931,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.title = trim_prefix(episode_title, 'Functional Geekery Episode ')
         tag2.write()
 
+    elif channel_title == 'Command Line Heroes':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.genre = 'Podcast'
+        tag2.write()
+
     elif channel_title == 'Scalalaz Podcast':
         # remove picture element from v2.2 and fix some v2 tags
         try:
