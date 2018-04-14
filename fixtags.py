@@ -1026,6 +1026,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'TechSNAP MP3')
             or (channel_title == 'Triangulation (MP3)')
             or (channel_title == 'Slow German')
+            or (channel_title == 'CoRecursive w/ Adam Bell')
             ):
         # nothing to fix here
         pass
