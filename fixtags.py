@@ -1004,12 +1004,20 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 
     elif channel_title == 'Top-Thema mit Vokabeln | Deutsch lernen | Deutsche Welle':
         # fix some v2 tags
-        tag2 = stagger.read_tag(episode_fname)
         try:
-            del tag2['APIC']
-        except KeyError:
-            pass
-        tag2.write()
+            tag2 = stagger.read_tag(episode_fname)
+            try:
+                del tag2['APIC']
+            except KeyError:
+                pass
+        except stagger.errors.NoTagError:
+            tag2 = stagger.Tag24()
+            tag2.title = episode_title
+            tag2.artist = 'Deutsche Welle'
+            tag2.album = channel_title
+            tag2.date = episode_year
+            tag2.genre = 'Podcast'
+        tag2.write(episode_fname)
 
     elif ((channel_title == 'UWP - Eженедельный подкаст от Umputun')
             or (channel_title == 'Discovery')
