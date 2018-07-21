@@ -58,12 +58,14 @@ def trim_prefix(episode_title, prefix):
 
 def main():
     # get episode info from the environment variables
-    global episode_fname
+    global episode_title, episode_fname, channel_title, episode_pubdate
     try:
         episode_title = os.environ['GPODDER_EPISODE_TITLE']
         episode_fname = os.environ['GPODDER_EPISODE_FILENAME']
         channel_title = os.environ['GPODDER_CHANNEL_TITLE']
         episode_pubdate = int(float(os.environ['GPODDER_EPISODE_PUBDATE']))
+
+        import stagger
     except KeyError:
         print("""This script should be run by gPodder. Put its path and filename ({0}) as the argument to 'cmd_download_complete' option.
 For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stretching_.28making_playback_slower_or_faster.29', the 'Using the post-download script hook' section.""".format(os.path.abspath(sys.argv[0])), file=sys.stderr)
@@ -1072,10 +1074,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
 if __name__ == '__main__':
     try:
         setup()
-        import stagger
         main()
     except ImportError:
-        logger.critical("Couldn't import stagger! Please check.")
+        logger.critical("Couldn't import stagger! Please fix. GPODDER_CHANNEL_TITLE='{0}' "
+            "GPODDER_EPISODE_TITLE='{1}' GPODDER_EPISODE_FILENAME='{2}' "
+            "GPODDER_EPISODE_PUBDATE='{3}'".format(channel_title,
+                episode_title, episode_fname, episode_pubdate))
         sys.exit(3)
     except WrongInvocationError:
         # don't panic on this error
