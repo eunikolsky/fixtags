@@ -1039,11 +1039,10 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         # nothing to fix here
         pass
 
-    else:
-        logger.info("No fixes for the episode. GPODDER_EPISODE_TITLE='{0}' "
-            "GPODDER_EPISODE_FILENAME='{1}' GPODDER_CHANNEL_TITLE='{2}' "
-            "GPODDER_EPISODE_PUBDATE='{3}'".format(episode_title,
-                episode_fname, channel_title, episode_pubdate))
+    else: logger.info("No fixes for the episode. GPODDER_CHANNEL_TITLE='{0}' "
+            "GPODDER_EPISODE_TITLE='{1}' GPODDER_EPISODE_FILENAME='{2}' "
+            "GPODDER_EPISODE_PUBDATE='{3}'".format(channel_title,
+                episode_title, episode_fname, episode_pubdate))
 
 if __name__ == '__main__':
     try:
