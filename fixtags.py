@@ -1089,6 +1089,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'Slow German')
             or (channel_title == 'CoRecursive w/ Adam Bell')
             or (channel_title == 'Reply All')
+            or (channel_title == 'The Amp Hour Electronics Podcast')
             ):
         # nothing to fix here
         pass
