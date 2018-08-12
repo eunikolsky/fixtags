@@ -461,18 +461,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.track = tag22.track
         tag2.write(episode_fname)
 
-    elif channel_title == 'The Art Of Programming':
-        # move v2.2 to v2.4 tags and remove v1
-        tag22 = stagger.read_tag(episode_fname)
-        tag2 = stagger.Tag24()
-        tag2.artist = tag22.artist
-        tag2.album = channel_title
-        tag2.title = tag22.title[36:]
-        tag2.genre = 'Podcast'
-        tag2.date = episode_year
-        stagger.id3v1.Tag1.delete(episode_fname)
-        tag2.write(episode_fname)
-
     elif channel_title == 'Ask the Naked Scientists':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
