@@ -1005,6 +1005,12 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.write()
 
+    elif channel_title == 'The Amp Hour Electronics Podcast':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.artist = channel_title
+        tag2.write()
+
     elif channel_title == 'Scalalaz Podcast':
         # remove picture element from v2.2 and fix some v2 tags
         try:
@@ -1101,7 +1107,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'Slow German')
             or (channel_title == 'CoRecursive w/ Adam Bell')
             or (channel_title == 'Reply All')
-            or (channel_title == 'The Amp Hour Electronics Podcast')
             ):
         # nothing to fix here
         pass
