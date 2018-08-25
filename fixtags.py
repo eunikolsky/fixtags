@@ -484,6 +484,20 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.album = channel_title
         tag2.write()
 
+    elif channel_title == 'Accidental Tech Podcast':
+        # fix some v2 tags
+        tag2 = stagger.read_tag(episode_fname)
+        tag2.genre = 'Podcast'
+        try:
+            del tag2['CTOC']
+        except KeyError:
+            pass
+        try:
+            del tag2['CHAP']
+        except KeyError:
+            pass
+        tag2.write()
+
     elif channel_title == 'NPR: Car Talk Podcast':
         # fix some v2 tags and remove v1
         tag2 = stagger.read_tag(episode_fname)
