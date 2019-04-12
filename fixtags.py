@@ -210,6 +210,16 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         tag2.genre = 'Podcast'
         tag2.write(episode_fname)
 
+    elif channel_title == 'Langsam gesprochene Nachrichten | Deutsch lernen | Deutsche Welle':
+        # set all v2 tags
+        tag2 = stagger.Tag24()
+        tag2.artist = 'Deutsche Welle'
+        tag2.title = episode_title
+        tag2.album = channel_title
+        tag2.date = episode_year
+        tag2.genre = 'Podcast'
+        tag2.write(episode_fname)
+
     elif channel_title == 'Америчка':
         # fix some v2 tags
         tag2 = stagger.read_tag(episode_fname)
