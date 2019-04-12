@@ -12,5 +12,5 @@ colours=yellow
 regexp=.*INFO.*
 colours="\033[1;36m"
 ===
-regexp=(?<=GPODDER_CHANNEL_TITLE=)'[^']+'
+regexp=(?<=GPODDER_CHANNEL_TITLE=)'.+?'(?= G)
 colours=yellow
