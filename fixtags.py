@@ -200,16 +200,6 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
         stagger.id3v1.Tag1.delete(episode_fname)
         tag2.write(episode_fname)
 
-    elif channel_title == 'Радио-Т Поток':
-        # set all v2 tags
-        tag2 = stagger.Tag24()
-        tag2.artist = 'Радио-Т'
-        tag2.title = episode_title
-        tag2.album = channel_title
-        tag2.date = episode_year
-        tag2.genre = 'Podcast'
-        tag2.write(episode_fname)
-
     elif channel_title == 'Langsam gesprochene Nachrichten | Deutsch lernen | Deutsche Welle':
         # set all v2 tags
         tag2 = stagger.Tag24()
@@ -1172,6 +1162,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'Reply All')
             or (channel_title == 'LINUX Unplugged')
             or (channel_title == 'Hackaday Podcast')
+            or (channel_title == 'Радио-Т Поток')
             ):
         # nothing to fix here
         pass
