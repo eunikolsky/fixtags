@@ -45,7 +45,7 @@ class gPodderExtension:
         info = self.get_episode_info(episode)
         logger.info(u'on_episode_downloaded (filename="%s", '
                 u'episode_title="%s", channel_title="%s", '
-                u'episode_pubdate="%d")' %
+                u'episode_pubdate="%s")' %
                 (info[Key.FILENAME],
                     info[Key.EPISODE_TITLE],
                     info[Key.CHANNEL_TITLE],
@@ -66,7 +66,7 @@ class gPodderExtension:
         penv = os.environ.copy()
         if env is not None:
             for k, v in env.iteritems():
-                penv[k] = str(v)
+                penv[k] = v.encode('utf-8')
         # OS X specific: when gPodder is started from a bundle (.app file)
         # the bootstrap script sets PYTHON, PYTHONPATH, and PYTHONHOME
         # env vars to point to the bundled python 2. Thus, an attempt to
@@ -99,10 +99,9 @@ class gPodderExtension:
         }
 
         info[Key.FILENAME] = episode.local_filename(create=False,
-                check_only=True)
+                check_only=True).decode('utf-8')
         info[Key.EPISODE_TITLE] = episode.trimmed_title
         info[Key.CHANNEL_TITLE] = episode.channel.title
-        info[Key.EPISODE_PUBDATE] = episode.published
+        info[Key.EPISODE_PUBDATE] = str(episode.published)
 
         return info
-
