@@ -1163,6 +1163,7 @@ For more information, go to 'http://wiki.gpodder.org/wiki/User_Manual#Time_stret
             or (channel_title == 'LINUX Unplugged')
             or (channel_title == 'Hackaday Podcast')
             or (channel_title == 'Радио-Т Поток')
+            or (channel_title == 'Пиратский Канадский Лось и компания')
             ):
         # nothing to fix here
         pass
