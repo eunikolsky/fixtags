@@ -1,5 +1,7 @@
 ## fixtags.py
 
+The script is now [deprecated](https://egeek.me/2021/01/17/fixtags-is-deprecated/).
+
 It's a python script that fixes podcasts' MP3 tags after downloading the podcasts with [gPodder](http://gpodder.org/). The fixes are required for Sansa Sandisk Clip+ players to display the podcasts properly.
 
 Requirements to run:
